@@ -10,8 +10,9 @@ import { faCartPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 import { notification } from 'antd';
 import { useAuthorizationContext } from '@/functions/AuthorizationContext';
+import Link from 'next/link';
 
-const ProductDisplayItem: React.FC<{
+const CartDisplayItem: React.FC<{
     foodItem: FoodItemDataGridItem
 }> = ({ foodItem }) => {
 
@@ -64,7 +65,7 @@ const ProductDisplayItem: React.FC<{
             </td>
             <td>
                 <button onClick={addToCart} className='block w-full p-1 text-sm rounded-md bg-blue-500 active:bg-blue-700 text-white' type='button'>
-                    <FontAwesomeIcon icon={faMinus} className='mr-3'></FontAwesomeIcon>
+                    <FontAwesomeIcon icon={faCartPlus} className='mr-3'></FontAwesomeIcon>
                     Add To Cart
                 </button>
             </td>
@@ -80,6 +81,7 @@ const InnerIndexPage: React.FC = () => {
     return (
         <div>
             <Title>Add Cart</Title>
+            <Link href='/'>Return Back</Link>
             <table className='table-auto mt-5'>
                 <thead className='bg-slate-700 text-white'>
                     <tr>
@@ -90,7 +92,7 @@ const InnerIndexPage: React.FC = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data?.map((x, i) => <ProductDisplayItem key={i} foodItem={x} />)}
+                    {data?.map((x, i) => <CartDisplayItem key={i} foodItem={x} />)}
                 </tbody>
             </table>
         </div>

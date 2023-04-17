@@ -98,7 +98,7 @@ export class BackEndClient {
     /**
      * @return Success
      */
-    cartDetailsGET(id: string): Promise<CartDetail> {
+    getCartDetail(id: string): Promise<CartDetailModel> {
         let url_ = this.baseUrl + "/api/CartDetails/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -113,17 +113,17 @@ export class BackEndClient {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processCartDetailsGET(_response);
+            return this.processGetCartDetail(_response);
         });
     }
 
-    protected processCartDetailsGET(response: Response): Promise<CartDetail> {
+    protected processGetCartDetail(response: Response): Promise<CartDetailModel> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
             return response.text().then((_responseText) => {
             let result200: any = null;
-            result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as CartDetail;
+            result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as CartDetailModel;
             return result200;
             });
         } else if (status !== 200 && status !== 204) {
@@ -131,7 +131,7 @@ export class BackEndClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<CartDetail>(null as any);
+        return Promise.resolve<CartDetailModel>(null as any);
     }
 
     /**
@@ -251,7 +251,7 @@ export class BackEndClient {
      * @param body (optional) 
      * @return Success
      */
-    addToCartRestaurant(body: AddToCartModel | undefined): Promise<boolean> {
+    addCart(body: AddToCartModel | undefined): Promise<boolean> {
         let url_ = this.baseUrl + "/api/Carts";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -267,11 +267,11 @@ export class BackEndClient {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processAddToCartRestaurant(_response);
+            return this.processAddCart(_response);
         });
     }
 
-    protected processAddToCartRestaurant(response: Response): Promise<boolean> {
+    protected processAddCart(response: Response): Promise<boolean> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -811,6 +811,13 @@ export interface CartDetail {
     cart?: Cart;
     foodItemId?: string | undefined;
     foodItem?: FoodItem;
+    qty?: number;
+}
+
+export interface CartDetailModel {
+    id?: string | undefined;
+    foodItemsId?: string | undefined;
+    foodItemsPrice?: number;
     qty?: number;
 }
 

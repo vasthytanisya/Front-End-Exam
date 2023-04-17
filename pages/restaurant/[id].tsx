@@ -20,10 +20,10 @@ const FoodItemTableRow: React.FC<{
                 <Link href={`/add-to-cart/${foodItem.id}`} className='inline-block py-1 px-2 text-xs bg-blue-500 text-white rounded-lg' type='button'>
                     Add to Cart
                 </Link>
+                <Link href={`/order-summary/${foodItem.restaurandId}`} className='ml-1 py-1 px-2 text-xs bg-blue-500 text-white rounded-lg' type='button'>
+                    CheckOut
+                </Link>
             </td>
-            <Link href={`/order-summary/${foodItem.restaurandId}`} className='inline-block py-1 px-2 text-xs bg-blue-500 text-white rounded-lg' type='button'>
-                CheckOut
-            </Link>
         </tr>
     );
 };
