@@ -57,10 +57,10 @@ const CartDisplayItem: React.FC<{
             <td className="border px-4 py-2">{'Rp.' + foodItem.price?.toLocaleString()}</td>
             <td>
                 <button onClick={() => setQty((q) => q + 1)} className='inline-block py-1 px-2 text-xs bg-blue-500 text-white rounded-lg' type='button'>
-                    <FontAwesomeIcon icon={faCartPlus} className='mr-3'></FontAwesomeIcon>
+                    <FontAwesomeIcon icon={faCartPlus}></FontAwesomeIcon>
                 </button>
                 <button onClick={() => setQty((q) => q - 1)} className=' py-1 px-2 text-xs bg-blue-500 text-white rounded-lg' type='button'>
-                    <FontAwesomeIcon icon={faMinus} className='mr-3'></FontAwesomeIcon>
+                    <FontAwesomeIcon icon={faMinus}></FontAwesomeIcon>
                 </button>
             </td>
             <td>
